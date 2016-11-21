@@ -26,7 +26,7 @@ Add the library dependency in your build.gradle file.
     
     //in your app/guild.gradle
     dependencies {
-	        compile 'com.github.yesidlazaro:bubbles-for-android:1.2.2'
+	        compile 'com.github.yesidlazaro:bubbles-for-android:{insert-last-version}'
 	}   
 ```
 
