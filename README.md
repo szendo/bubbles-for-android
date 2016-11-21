@@ -7,7 +7,8 @@ Bubbles for Android is an Android library to provide chat heads capabilities on 
 
 ## Latest Version
 
-[![Download](https://api.bintray.com/packages/txusballesteros/maven/bubbles-for-android/images/download.svg) ](https://bintray.com/txusballesteros/maven/bubbles-for-android/_latestVersion) ![](https://img.shields.io/badge/platform-android-green.svg) [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Bubbles%20for%20Android-green.svg?style=flat)](https://android-arsenal.com/details/1/2113)
+[![](https://jitpack.io/v/yesidlazaro/bubbles-for-android.svg)](https://jitpack.io/#yesidlazaro/bubbles-for-android)
+
 
 ## How to use
 
@@ -16,10 +17,17 @@ Bubbles for Android is an Android library to provide chat heads capabilities on 
 Add the library dependency in your build.gradle file.
 
 ```groovy
-dependencies {
-    ...
-    compile 'com.txusballesteros:bubbles:1.2.1'
-}
+	allprojects {
+		repositories {
+			...
+			maven { url "https://jitpack.io" }
+		}
+	}
+    
+    //in your app/guild.gradle
+    dependencies {
+	        compile 'com.github.yesidlazaro:bubbles-for-android:1.2.2'
+	}   
 ```
 
 ### Adding your first Bubble
