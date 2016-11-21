@@ -114,6 +114,14 @@ public class BubblesManager {
         return null;
     }
 
+    public boolean isBounded() {
+        return bounded;
+    }
+
+    public void setBounded(boolean bounded) {
+        this.bounded = bounded;
+    }
+
     public static class Builder {
         private BubblesManager bubblesManager;
 
