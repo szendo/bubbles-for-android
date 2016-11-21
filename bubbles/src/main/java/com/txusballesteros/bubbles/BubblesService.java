@@ -27,7 +27,6 @@ package com.txusballesteros.bubbles;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
@@ -36,7 +35,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +78,7 @@ public class BubblesService extends Service {
 
     private WindowManager getWindowManager() {
         if (windowManager == null) {
-            windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
+            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         }
         return windowManager;
     }
@@ -111,6 +109,24 @@ public class BubblesService extends Service {
                 .setWindowManager(getWindowManager())
                 .setTrashView(bubblesTrash)
                 .build();
+    }
+
+
+    public List<BubbleLayout> getBubbles() {
+        return bubbles;
+    }
+
+    public void setBubbles(List<BubbleLayout> bubbles) {
+        this.bubbles = bubbles;
+    }
+
+    public BubbleLayout getBubble(int bubbleId) {
+        for (BubbleLayout bubble : bubbles) {
+            if (bubble.getId() == bubbleId) {
+                return bubble;
+            }
+        }
+        return null;
     }
 
     private void addViewToWindow(final BubbleBaseLayout view) {

@@ -30,6 +30,9 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BubblesManager {
     private static BubblesManager INSTANCE;
     private Context context;
@@ -48,7 +51,7 @@ public class BubblesManager {
     private ServiceConnection bubbleServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            BubblesService.BubblesServiceBinder binder = (BubblesService.BubblesServiceBinder)service;
+            BubblesService.BubblesServiceBinder binder = (BubblesService.BubblesServiceBinder) service;
             BubblesManager.this.bubblesService = binder.getService();
             configureBubblesService();
             bounded = true;
@@ -93,6 +96,24 @@ public class BubblesManager {
         }
     }
 
+    public List<BubbleLayout> getBubbles() {
+        if (bounded) {
+            bubblesService.getBubbles();
+        }
+        return new ArrayList<>();
+    }
+
+    public boolean bubbleExists(int bubbleId) {
+        return bounded && bubblesService.getBubble(bubbleId) != null;
+    }
+
+    public BubbleLayout getBubbleWithId(int bubbleId) {
+        if (bounded) {
+            return bubblesService.getBubble(bubbleId);
+        }
+        return null;
+    }
+
     public static class Builder {
         private BubblesManager bubblesManager;
 
@@ -106,7 +127,7 @@ public class BubblesManager {
         }
 
         public Builder setTrashLayout(int trashLayoutResourceId) {
-            bubblesManager.trashLayoutResourceId =trashLayoutResourceId;
+            bubblesManager.trashLayoutResourceId = trashLayoutResourceId;
             return this;
         }
 
