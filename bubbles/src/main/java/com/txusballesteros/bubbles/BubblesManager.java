@@ -98,7 +98,7 @@ public class BubblesManager {
 
     public List<BubbleLayout> getBubbles() {
         if (bounded) {
-            bubblesService.getBubbles();
+           return bubblesService.getBubbles();
         }
         return new ArrayList<>();
     }
