@@ -31,6 +31,7 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,13 +65,17 @@ public class BubblesService extends Service {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                getWindowManager().removeView(bubble);
-                for (BubbleLayout cachedBubble : bubbles) {
-                    if (cachedBubble == bubble) {
-                        bubble.notifyBubbleRemoved();
-                        bubbles.remove(cachedBubble);
-                        break;
+                try {
+                    getWindowManager().removeView(bubble);
+                    for (BubbleLayout cachedBubble : bubbles) {
+                        if (cachedBubble == bubble) {
+                            bubble.notifyBubbleRemoved();
+                            bubbles.remove(cachedBubble);
+                            break;
+                        }
                     }
+                } catch (Exception e) {
+                    Log.d("BubblesService", e.getMessage());
                 }
             }
         });
@@ -133,7 +138,11 @@ public class BubblesService extends Service {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                getWindowManager().addView(view, view.getViewParams());
+                try {
+                    getWindowManager().addView(view, view.getViewParams());
+                } catch (Exception e) {
+                    Log.d("BubblesService", e.getMessage());
+                }
             }
         });
     }
