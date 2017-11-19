@@ -40,14 +40,6 @@ public class BubblesManager {
     private BubblesService bubblesService;
     private int trashLayoutResourceId;
     private OnInitializedCallback listener;
-
-    private static BubblesManager getInstance(Context context) {
-        if (INSTANCE == null) {
-            INSTANCE = new BubblesManager(context);
-        }
-        return INSTANCE;
-    }
-
     private ServiceConnection bubbleServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -68,6 +60,13 @@ public class BubblesManager {
 
     private BubblesManager(Context context) {
         this.context = context;
+    }
+
+    private static BubblesManager getInstance(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new BubblesManager(context);
+        }
+        return INSTANCE;
     }
 
     private void configureBubblesService() {
@@ -98,7 +97,7 @@ public class BubblesManager {
 
     public List<BubbleLayout> getBubbles() {
         if (bounded) {
-           return bubblesService.getBubbles();
+            return bubblesService.getBubbles();
         }
         return new ArrayList<>();
     }
